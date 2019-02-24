@@ -1,1 +1,1 @@
-Dash is simple data share platform to between two sites.
+Dash (Data Share) is simple data share platform to between two sites.
