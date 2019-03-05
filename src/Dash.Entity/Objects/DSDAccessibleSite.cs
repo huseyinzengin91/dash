@@ -10,7 +10,9 @@ namespace Dash.Entity.Objects
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public virtual DSDSite SiteId { get; set; }
-        public virtual DSDSite AccessibleSiteId { get; set; }
+        public virtual DSDSite Site { get; set; }
+        public virtual DSDSite AccessibleSite { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 }

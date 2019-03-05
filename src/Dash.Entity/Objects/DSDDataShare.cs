@@ -9,10 +9,12 @@ namespace Dash.Entity.Objects
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public virtual DSDSite OwnerSiteId { get; set; }
+        public virtual DSDSite OwnerSite { get; set; }
         public string DataShareCode { get; set; }
         public string Value { get; set; }
         public int Status { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 
     public enum DSDDataShareStatusTypes : short

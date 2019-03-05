@@ -14,6 +14,8 @@ namespace Dash.Entity.Objects
         public string AccessCode { get; set; }
         public DateTime AccessCodeEndDate { get; set; }
         public DSDSiteStatusTypes Status { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 
     public enum DSDSiteStatusTypes : short
