@@ -17,12 +17,14 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
-
-        <li class="nav-item" v-for="(route, index) in routes" :key="index">
-            <router-link class="nav-link" :to="route.path" exact-active-class="active">
-                <icon :icon="route.icon" class="mr-2" /><span>{{ route.display }}</span> 
-            </router-link>
-        </li>
+        <template v-for="(route, index) in routes">
+          <li class="nav-item" :key="index" v-if="!route.hidden">
+              <router-link class="nav-link" :to="route.path" exact-active-class="active">
+                  <icon :icon="route.icon" class="mr-2" /><span>{{ route.display }}</span> 
+              </router-link>
+          </li>
+        </template>
+        
 
         <!-- TODO: alt menülü navigasyon ihtiyacında burası düzenlenecek -->
 

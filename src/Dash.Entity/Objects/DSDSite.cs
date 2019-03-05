@@ -10,6 +10,8 @@ namespace Dash.Entity.Objects
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public string SiteAddress { get; set; }
         public string AccessCode { get; set; }
         public DateTime AccessCodeEndDate { get; set; }

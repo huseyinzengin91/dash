@@ -1,0 +1,4 @@
+# Add DB Migration
+dotnet ef migrations add Initialize-Migration --startup-project=../Dash.Web/Dash.Web.csproj
+# Update DB Migration
+dotnet ef database update --startup-project=../Dash.Web/Dash.Web.csproj

@@ -5,6 +5,7 @@ import store from './store'
 import { sync } from 'vuex-router-sync'
 import App from 'components/root/app-root'
 import { FontAwesomeIcon } from './icons'
+import './filters.js'
 
 // Registration of global components
 Vue.component('icon', FontAwesomeIcon)
