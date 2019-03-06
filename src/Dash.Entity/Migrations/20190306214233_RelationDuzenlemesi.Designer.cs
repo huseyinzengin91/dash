@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dash.Entity.Migrations
 {
     [DbContext(typeof(DSDContext))]
-    [Migration("20190303193014_Initialize-Migration")]
-    partial class InitializeMigration
+    [Migration("20190306214233_RelationDuzenlemesi")]
+    partial class RelationDuzenlemesi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,15 +26,15 @@ namespace Dash.Entity.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AccessibleSiteIdId");
+                    b.Property<Guid>("AccessibleSiteId");
 
-                    b.Property<Guid?>("SiteIdId");
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime>("ModifiedOn");
+
+                    b.Property<Guid>("SiteId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccessibleSiteIdId");
-
-                    b.HasIndex("SiteIdId");
 
                     b.ToTable("AccessibleSite");
                 });
@@ -44,19 +44,23 @@ namespace Dash.Entity.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreatedOn");
+
                     b.Property<string>("DataShareCode");
 
-                    b.Property<Guid?>("OwnerSiteIdId");
+                    b.Property<DateTime>("ExpireDate");
 
-                    b.Property<int>("Status");
+                    b.Property<DateTime>("ModifiedOn");
+
+                    b.Property<Guid>("OwnerSiteId");
+
+                    b.Property<short>("Status");
 
                     b.Property<string>("Value");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerSiteIdId");
-
-                    b.ToTable("DataShares");
+                    b.ToTable("DataShare");
                 });
 
             modelBuilder.Entity("Dash.Entity.Objects.DSDSite", b =>
@@ -67,6 +71,14 @@ namespace Dash.Entity.Migrations
                     b.Property<string>("AccessCode");
 
                     b.Property<DateTime>("AccessCodeEndDate");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("ModifiedOn");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("SiteAddress");
 
@@ -97,24 +109,6 @@ namespace Dash.Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Dash.Entity.Objects.DSDAccessibleSite", b =>
-                {
-                    b.HasOne("Dash.Entity.Objects.DSDSite", "AccessibleSiteId")
-                        .WithMany()
-                        .HasForeignKey("AccessibleSiteIdId");
-
-                    b.HasOne("Dash.Entity.Objects.DSDSite", "SiteId")
-                        .WithMany()
-                        .HasForeignKey("SiteIdId");
-                });
-
-            modelBuilder.Entity("Dash.Entity.Objects.DSDDataShare", b =>
-                {
-                    b.HasOne("Dash.Entity.Objects.DSDSite", "OwnerSiteId")
-                        .WithMany()
-                        .HasForeignKey("OwnerSiteIdId");
                 });
 #pragma warning restore 612, 618
         }

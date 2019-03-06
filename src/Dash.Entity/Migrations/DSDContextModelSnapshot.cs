@@ -24,19 +24,15 @@ namespace Dash.Entity.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AccessibleSiteId");
+                    b.Property<Guid>("AccessibleSiteId");
 
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime>("ModifiedOn");
 
-                    b.Property<Guid?>("SiteId");
+                    b.Property<Guid>("SiteId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccessibleSiteId");
-
-                    b.HasIndex("SiteId");
 
                     b.ToTable("AccessibleSite");
                 });
@@ -54,7 +50,7 @@ namespace Dash.Entity.Migrations
 
                     b.Property<DateTime>("ModifiedOn");
 
-                    b.Property<Guid?>("OwnerSiteId");
+                    b.Property<Guid>("OwnerSiteId");
 
                     b.Property<short>("Status");
 
@@ -62,9 +58,7 @@ namespace Dash.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerSiteId");
-
-                    b.ToTable("DataShares");
+                    b.ToTable("DataShare");
                 });
 
             modelBuilder.Entity("Dash.Entity.Objects.DSDSite", b =>
@@ -113,24 +107,6 @@ namespace Dash.Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Dash.Entity.Objects.DSDAccessibleSite", b =>
-                {
-                    b.HasOne("Dash.Entity.Objects.DSDSite", "AccessibleSite")
-                        .WithMany()
-                        .HasForeignKey("AccessibleSiteId");
-
-                    b.HasOne("Dash.Entity.Objects.DSDSite", "Site")
-                        .WithMany()
-                        .HasForeignKey("SiteId");
-                });
-
-            modelBuilder.Entity("Dash.Entity.Objects.DSDDataShare", b =>
-                {
-                    b.HasOne("Dash.Entity.Objects.DSDSite", "OwnerSite")
-                        .WithMany()
-                        .HasForeignKey("OwnerSiteId");
                 });
 #pragma warning restore 612, 618
         }

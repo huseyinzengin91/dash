@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Dash.Web.Models.Client
+namespace Dash.Web.Models.Transporter
 {
-    public class DSVMTransportRequest
+    public class DSRMTransportRequest
     {
         [Required]
         [MaxLength(50)]
@@ -17,12 +17,3 @@ namespace Dash.Web.Models.Client
         public string Data { get; set; }
     }
 }
-
-
-
-/* 
-Siteadress:abc.com
-              AccessibleSite:xyx.com
-              AccessCode: xxxxxx (Tabloda ilgili site için tanımlanan erişim kodu)
-              SessionValue: xyz.com portalında login için kullanılacak parametreler json formatta buraya kaydedilir {username:gnb\hzengin}
-*/
