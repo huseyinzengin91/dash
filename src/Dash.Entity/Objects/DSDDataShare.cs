@@ -12,7 +12,8 @@ namespace Dash.Entity.Objects
         public virtual DSDSite OwnerSite { get; set; }
         public string DataShareCode { get; set; }
         public string Value { get; set; }
-        public int Status { get; set; }
+        public DSDDataShareStatusTypes Status { get; set; }
+        public DateTime ExpireDate { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
     }

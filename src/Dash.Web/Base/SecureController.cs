@@ -9,7 +9,8 @@ namespace Dash.Web
     public class SecureController : DBController
     {
         public Guid UserId {
-            get => new Guid((HttpContext.User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst(z => z.Type == ClaimTypes.NameIdentifier).Value);
+            get => HttpContext.User.Identity.IsAuthenticated ? new Guid((HttpContext.User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst(z => z.Type == ClaimTypes.NameIdentifier).Value) : Guid.Empty;
+
         }
         //Name = (HttpContext.User.Identity as System.Security.Claims.ClaimsIdentity).FindFirst(z => z.Type == ClaimTypes.Name).Value
     }
