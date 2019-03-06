@@ -128,11 +128,10 @@ namespace Dash.Web.Controllers
                 return Error(message: $"You have not access permission {ownerSiteAddress} to {value.FromSiteAddress}");
             }
                 
-
             try
             {
                 dataShare.Status = DSDDataShareStatusTypes.Deactive;
-                var x= Db.DataShares.Update(dataShare);
+                Db.DataShares.Update(dataShare);
                 await Db.SaveChangesAsync();
             }
             catch (System.Exception ex)
