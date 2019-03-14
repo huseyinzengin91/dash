@@ -6,13 +6,18 @@
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" placeholder="Name">
+          <input type="text" v-model="model.name" class="form-control" id="name" placeholder="Name">
         </div>
       </div>
       <div class="form-group row">
         <label for="description" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
-          <textarea class="form-control" id="description" placeholder="Description"></textarea>
+          <textarea
+            class="form-control"
+            v-model="model.description"
+            id="description"
+            placeholder="Description"
+          ></textarea>
         </div>
       </div>
       <div class="form-group row">
@@ -20,10 +25,24 @@
         <div class="col-sm-10">
           <input
             type="text"
+            v-model="model.siteAddress"
             class="form-control"
             id="siteAddress"
             placeholder="Site Address (www.google.com)"
           >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Expiration Date</label>
+        <div class="col-sm-10">
+          <datetime
+            id="expirationdate"
+            v-model="model.expirationDate"
+            type="datetime"
+            :min-datetime="minDatetime"
+            input-class="form-control"
+            placeholder="Expiration Date"
+          ></datetime>
         </div>
       </div>
 
@@ -34,23 +53,24 @@
             <div class="form-check">
               <input
                 class="form-check-input"
+                v-model="model.status"
                 type="radio"
-                name="gridRadios"
-                id="gridRadios1"
-                value="option1"
-                checked
+                name="status"
+                id="status-active"
+                value="1"
               >
-              <label class="form-check-label" for="gridRadios1">Active</label>
+              <label class="form-check-label" for="status-active">Active</label>
             </div>
             <div class="form-check">
               <input
                 class="form-check-input"
+                v-model="model.status"
                 type="radio"
-                name="gridRadios"
-                id="gridRadios2"
-                value="option2"
+                name="status"
+                id="status-deacrive"
+                value="0"
               >
-              <label class="form-check-label" for="gridRadios2">Deactive</label>
+              <label class="form-check-label" for="status-deacrive">Deactive</label>
             </div>
           </div>
         </div>
@@ -58,7 +78,7 @@
 
       <div class="form-group row">
         <div class="col-sm-10">
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" @click="addSite" class="btn btn-primary">Save</button>
         </div>
       </div>
     </form>
@@ -68,12 +88,48 @@
 </template>
 
 <script>
+
 export default {
   name: "addsite",
   data() {
-    return {};
+    return {
+      model: {
+        name: null,
+        description: null,
+        siteAddress: null,
+        expirationDate: null,
+        status: 1
+      },
+      minDatetime: new Date().toISOString()
+    };
   },
-  methods: {}
+  methods: {
+    addSite() {
+      this.$http
+        .post("/api/v1/Site/Add", this.model)
+        .then(response => {
+          if (response.data.success && response.data.data && response.data.data.id) {
+            this.$notify({
+              type: "success",
+              title: "Success",
+              text: response.data.message
+            });
+
+            this.$router.push({
+                name: "sites"
+            });
+          }
+        })
+        .catch(err => {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: err.response.data.message
+          });
+          console.error(err.response);
+        });
+    }
+  }
 };
 </script>
 

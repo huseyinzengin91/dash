@@ -7,7 +7,7 @@
     <br>
 
     <table class="table table-striped">
-      <thead>
+      <thead class="bg-dark text-white">
         <tr>
           <th>#</th>
           <th>Name</th>

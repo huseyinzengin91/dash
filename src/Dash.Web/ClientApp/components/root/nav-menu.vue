@@ -10,8 +10,8 @@
                 <i class="fas fa-laugh-wink"></i>
                 <icon icon="assistive-listening-systems" size="2x" />
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin
-                <sup>2</sup>
+            <div class="sidebar-brand-text mx-3">Data Share
+                <sup>1.0.0</sup>
             </div>
         </router-link>
 

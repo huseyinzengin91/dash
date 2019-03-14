@@ -55,7 +55,7 @@ namespace Dash.Web.Controllers
             try
             {
                 var shareCode = HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
-                var addResult = await Db.DataShares.AddAsync(new DSDDataShare
+                Db.DataShares.Add(new DSDDataShare
                 {
                     Id = new Guid(),
                     CreatedOn = DateTime.UtcNow,
@@ -67,9 +67,11 @@ namespace Dash.Web.Controllers
                     Value = value.Data
                 });
 
-                await Db.SaveChangesAsync();
-
-                return Success(message: "Send request is successfult created.", data: new { DataShareCode = System.Net.WebUtility.UrlEncode(shareCode) });
+                var result = await Db.SaveChangesAsync();
+                if(result > 0)
+                    return Success(message: "Send request is successfully created.", data: new { DataShareCode = System.Net.WebUtility.UrlEncode(shareCode) });
+                else
+                    return Error(message: "Something is wrong with your model!");
             }
             catch (System.Exception ex)
             {

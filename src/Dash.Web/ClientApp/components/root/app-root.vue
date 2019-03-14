@@ -3,6 +3,9 @@
   <div id="app">
     <!-- Page Wrapper -->
     <div id="wrapper">
+
+      <notifications />
+
       <!-- Sidebar -->
       <nav-menu params="route: route"></nav-menu>
       
