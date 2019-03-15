@@ -30,7 +30,12 @@
           <td>{{site.createdOn | formatDate}}</td>
           <td>{{site.modifiedOn | formatDate}}</td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm">Edit</button>
+            <router-link
+              class="btn btn-primary btn-sm"
+              tag="button"
+              :to="{name:'edit-site', params: {id:site.id}}"
+            >Edit
+            </router-link>
           </td>
         </tr>
       </tbody>
@@ -47,19 +52,19 @@ export default {
     };
   },
   created: function() {
-    this.getSites()
+    this.getSites();
   },
-  methods :{
-      getSites()
-      {
-        this.$http.get("/api/v1/Site/GetSites")
+  methods: {
+    getSites() {
+      this.$http
+        .get("/api/v1/Site/GetSites")
         .then(response => {
-            this.siteList = response.data.data;
+          this.siteList = response.data.data;
         })
         .catch(function(err) {
-            console.error(err);
+          console.error(err);
         });
-      }
+    }
   }
 };
 </script>
