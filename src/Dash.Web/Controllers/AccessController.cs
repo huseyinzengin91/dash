@@ -30,7 +30,7 @@ namespace Dash.Web.Controllers
                                         AccessibleSiteAddress = accessibleSite.SiteAddress,
                                         CreatedOn = acs.CreatedOn,
                                         ModifiedOn = acs.ModifiedOn
-                                    }).ToListAsync();
+                                    }).OrderByDescending(z => z.CreatedOn).ToListAsync();
 
             return Success(null, accessList);
         }
@@ -45,7 +45,7 @@ namespace Dash.Web.Controllers
                         z.Id,
                         z.Name,
                         z.SiteAddress,
-                    }).ToList();
+                    }).OrderBy(z => z.Name).ToList();
 
             return Success(null, list);
         }
@@ -66,7 +66,7 @@ namespace Dash.Web.Controllers
                 return Error(message: "Accessible Site add model parameters is invalid!", internalMessage: null, data: errors);
             }
 
-            var hasAccessibleSiteDefinition = await Db.AccessibleSites.AnyAsync(z => z.SiteId == value.SiteId && z.AccessibleSiteId == z.AccessibleSiteId);
+            var hasAccessibleSiteDefinition = await Db.AccessibleSites.AnyAsync(z => z.SiteId == value.SiteId && z.AccessibleSiteId == value.AccessibleSiteId);
 
             if (hasAccessibleSiteDefinition)
                 return Error(message: "Accessible Site definition is already existing!");
@@ -75,7 +75,9 @@ namespace Dash.Web.Controllers
             {
                 Id = Guid.NewGuid(),
                 SiteId = value.SiteId,
-                AccessibleSiteId = value.AccessibleSiteId
+                AccessibleSiteId = value.AccessibleSiteId,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow
             };
             Db.AccessibleSites.Add(data);
 
@@ -85,6 +87,34 @@ namespace Dash.Web.Controllers
                 {
                     Id = data.Id
                 });
+            else
+                return Error(message: "Something is wrong with your model!");
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete([FromBody]DSRMDelete value){
+
+            if (!ModelState.IsValid)
+            {
+                Dictionary<string, string> errors = new Dictionary<string, string>();
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Any())
+                        errors.Add(item.Key, string.Join("; ", item.Value.Errors.Select(x => x.ErrorMessage)));
+                }
+
+                return Error(message: "Accessible Site delete model parameters is invalid!", internalMessage: null, data: errors);
+            }
+
+            var access = await Db.AccessibleSites.FirstOrDefaultAsync(z => z.Id == value.Id);
+
+            if(access == null)
+                return Error(message: "Accessible Site definition is not found!");
+
+            Db.Remove(access);
+            var result = Db.SaveChanges();
+            if (result > 0)
+                return Success("Accessible Site deleted successfully.");
             else
                 return Error(message: "Something is wrong with your model!");
         }

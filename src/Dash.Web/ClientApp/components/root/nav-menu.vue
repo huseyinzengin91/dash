@@ -7,7 +7,6 @@
         <!-- Sidebar - Brand -->
         <router-link class="sidebar-brand d-flex align-items-center justify-content-center" to="/">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
                 <icon icon="assistive-listening-systems" size="2x" />
             </div>
             <div class="sidebar-brand-text mx-3">Data Share

@@ -16,7 +16,7 @@ namespace Dash.Web.Controllers
         [HttpGet("GetSites")]
         public async Task<IActionResult> GetSites()
         {
-            var sites = await Db.Sites.ToListAsync();
+            var sites = await Db.Sites.OrderByDescending(z => z.CreatedOn).ToListAsync();
             var list = sites.Select(x =>
                     new
                     {
@@ -142,7 +142,7 @@ namespace Dash.Web.Controllers
         }
         
         [HttpGet("NewHash")]
-        public async Task<IActionResult> NewHash(){
+        public IActionResult NewHash(){
             var accessCode = HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
             return Success(null, data: new { accessCode });
         }

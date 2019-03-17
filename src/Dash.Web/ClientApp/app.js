@@ -17,6 +17,9 @@ Settings.defaultLocale = 'en'
 import Notifications from 'vue-notification'
 Vue.use(Notifications)
 
+import VueContentPlaceholders from 'vue-content-placeholders'
+Vue.use(VueContentPlaceholders)
+
 // Registration of global components
 Vue.component('icon', FontAwesomeIcon)
 Vue.prototype.$http = axios

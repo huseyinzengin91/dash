@@ -1,14 +1,12 @@
 <template>
-
   <div id="app">
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-      <notifications />
+      <notifications/>
 
       <!-- Sidebar -->
       <nav-menu params="route: route"></nav-menu>
-      
+
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
@@ -101,18 +99,10 @@
                   class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                   aria-labelledby="userDropdown"
                 >
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
-                  </a>
+                  <router-link :to="{name: 'profile'}" tag="a" class="dropdown-item">
+                    <icon class="fas fa-sm fa-fw mr-2 text-gray-400" icon="user"/>Profile
+                  </router-link>
+
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

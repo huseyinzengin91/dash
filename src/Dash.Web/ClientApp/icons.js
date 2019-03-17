@@ -14,6 +14,7 @@ fontawesome.library.add(
   require('@fortawesome/fontawesome-free-solid/faAmbulance'),
   require('@fortawesome/fontawesome-free-solid/faAngleLeft'),
   require('@fortawesome/fontawesome-free-solid/faAssistiveListeningSystems'),
+  require('@fortawesome/fontawesome-free-solid/faUser'),
   // Brands
   require('@fortawesome/fontawesome-free-brands/faFontAwesome'),
   require('@fortawesome/fontawesome-free-brands/faMicrosoft'),

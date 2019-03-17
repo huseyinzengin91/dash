@@ -5,6 +5,7 @@ import Sites from 'components/pages/sites/list'
 import AddSite from 'components/pages/sites/add'
 import EditSite from 'components/pages/sites/edit'
 import AccessList from 'components/pages/access/list'
+import Profile from 'components/pages/user/profile'
 
 export const routes = [
   { name: 'dashboard', path: '/', component: Dashboard, display: 'Dashboard', icon: 'home' },
@@ -14,4 +15,5 @@ export const routes = [
   { name: 'add-site', path: '/add-site', component: AddSite, display: 'Add Site', hidden: true },
   { name: 'edit-site', path: '/edit-site/:id?', component: EditSite, display: 'Edit Site', hidden: true },
   { name: 'access-list', path: '/access-list', component: AccessList, display: 'Access List', icon: 'list' },
+  { name: 'profile', path: '/profile', component: Profile, display: 'Profile', icon: 'user', hidden: true },
 ]
