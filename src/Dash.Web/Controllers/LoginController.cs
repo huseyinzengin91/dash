@@ -30,7 +30,7 @@ namespace Dash.Web.Controllers
             if(!ModelState.IsValid)
                 return View("Index");
             
-            var userRecord = await this.Db.Users.FirstOrDefaultAsync(z => z.Username.Equals(req.Username) && z.Password.Equals(HashPassword(req.Password)));
+            var userRecord = await this.Db.Users.FirstOrDefaultAsync(z => z.Username.Equals(req.Username) && z.Password.Equals(new CryptoHelper().HashWithSHA512(req.Password)));
             if(userRecord == null){
                 ModelState.AddModelError("UserNotFound", "User not found!");
                 return View("Index");
@@ -66,16 +66,6 @@ namespace Dash.Web.Controllers
             await this.HttpContext.SignOutAsync();
             return RedirectToAction("Index");
         }
-
-        private string HashPassword(string password)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(password);
-            byte[] result;
-            SHA512 shaM = new SHA512Managed();
-            result = shaM.ComputeHash(data);
-
-            return  Convert.ToBase64String(result);
-        }
     }
 
     
@@ -86,8 +76,8 @@ namespace Dash.Web.Controllers
         [StringLength(10)]
         public string Username { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         [StringLength(20)]
-        //[MinLength(6)]
         public string Password { get; set; }
     }
 }

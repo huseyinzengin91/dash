@@ -54,7 +54,7 @@ namespace Dash.Web.Controllers
 
             try
             {
-                var shareCode = HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
+                var shareCode = new CryptoHelper().HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
                 Db.DataShares.Add(new DSDDataShare
                 {
                     Id = new Guid(),
@@ -142,16 +142,6 @@ namespace Dash.Web.Controllers
             }
 
             return Success(message: null, data: new { Data = dataShare.Value });
-        }
-
-        private string HashWithSHA512(string plainText)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(plainText);
-            byte[] result;
-            SHA512 shaM = new SHA512Managed();
-            result = shaM.ComputeHash(data);
-
-            return Convert.ToBase64String(result);
         }
     }
 }

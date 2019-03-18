@@ -58,9 +58,10 @@ namespace Dash.Web.Controllers
             user.Lastname = value.Lastname;
             user.Email = value.Email;
             user.Username = value.Username;
+            user.ModifiedOn = DateTime.UtcNow;
 
             if(!string.IsNullOrEmpty(value.Password))
-                user.Password = HashWithSHA512(value.Password);
+                user.Password = new CryptoHelper().HashWithSHA512(value.Password);
 
             Db.Users.Update(user);
             var result = await Db.SaveChangesAsync();
@@ -68,16 +69,6 @@ namespace Dash.Web.Controllers
                 return Success("User updated successfully.");
             else
                 return Error(message: "Something is wrong with your model!");
-        }
-       
-        private string HashWithSHA512(string plainText)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(plainText);
-            byte[] result;
-            SHA512 shaM = new SHA512Managed();
-            result = shaM.ComputeHash(data);
-
-            return Convert.ToBase64String(result);
         }
     }
 }

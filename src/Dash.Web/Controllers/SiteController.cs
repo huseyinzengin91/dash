@@ -75,7 +75,7 @@ namespace Dash.Web.Controllers
             if (hasSiteDefinition)
                 return Error(message: "Site definition is already existing!");
 
-            var accessCode = HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
+            var accessCode = new CryptoHelper().HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
             var data = new DSDSite
             {
                 AccessCode = accessCode,
@@ -143,18 +143,8 @@ namespace Dash.Web.Controllers
         
         [HttpGet("NewHash")]
         public IActionResult NewHash(){
-            var accessCode = HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
+            var accessCode = new CryptoHelper().HashWithSHA512(Guid.NewGuid() + DateTime.Now.ToString());
             return Success(null, data: new { accessCode });
-        }
-
-        private string HashWithSHA512(string plainText)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(plainText);
-            byte[] result;
-            SHA512 shaM = new SHA512Managed();
-            result = shaM.ComputeHash(data);
-
-            return Convert.ToBase64String(result);
         }
     }
 }
