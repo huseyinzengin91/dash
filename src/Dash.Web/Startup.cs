@@ -43,7 +43,7 @@ namespace Dash.Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Simple example with dependency injection for a data provider.
-            services.AddSingleton<Providers.IWeatherProvider, Providers.WeatherProviderFake>();
+            //services.AddSingleton<Providers.IWeatherProvider, Providers.WeatherProviderFake>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
