@@ -16,6 +16,8 @@ namespace Dash.Entity.Objects
         public string Username { get; set; }
         public string Password { get; set; }
         public DSDUserStatusTypes Status { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 
     public enum DSDUserStatusTypes : short
